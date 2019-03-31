@@ -1,0 +1,92 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load auth_extras %}
+{% block title %}
+    {#    {% if category %}{{ category.name }} {% else %} Products {% endif %}#}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container ">
+        <div class="row profile" style="margin-top:12%">
+
+            <!-- SIDEBAR  -->
+            <div class="card col-md-3 bg-light" style="max-height: 420px;">
+                <div class="profile-sidebar">
+                    <!-- SIDEBAR USERPIC -->
+                    <div class="profile-userpic">
+                        <img src="{% static 'main/img/icons/profile_user.png' %}" class="img-responsive" alt="">
+                    </div>
+
+                    <!-- SIDEBAR USER TITLE -->
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name">
+                            {{ user.username }}
+                        </div>
+                        <div class="profile-usertitle-job">
+                            {{ user.level }}
+                        </div>
+                    </div>
+
+                    <!-- SIDEBAR BUTTONS -->
+                    <div class="profile-userbuttons">
+                        <button type="button" class="btn btn-success btn-sm">Follow</button>
+                        <button type="button" class="btn btn-danger btn-sm">Message</button>
+                    </div>
+
+                    <!-- SIDEBAR MENU -->
+                    <div class="profile-usermenu">
+                        <ul class="nav flex-column">
+                            <li class="{% if request.path == '/account/profile/' %} active {% endif %}">
+                                <a href="{% url 'user_profile' %}">
+                                    <i class="fa fa-home"></i>
+                                    Overview </a>
+                            </li>
+                            <li class="{% if request.path == '/account/settings/' %} active {% endif %}">
+                                <!-- -->
+
+
+
+
+                                {% if request.user|is_vendor %}
+                                <a href="{% url 'user_vendor_listProducts' %}">
+                                    <i class="fa fa-user"></i>
+                                    Vendor Panel </a>
+                                {% else %}
+                                    <p>User doesn't belong to vendor</p>
+                                {% endif %}
+                            </li>
+                            <li class="{% if request.path == '/account/orders/' %} active {% endif %}">
+                                <a href="{% url 'user_order_list' %}">
+                                    <i class="fa fa-shipping-fast"></i>
+                                    My Orders </a>
+                            </li>
+                            <li class="{% if request.path == '/account/tasks/' %} active {% endif %}">
+                                <a href="#">
+                                    <i class="fa fa-clipboard-check"></i>
+                                    Tasks </a>
+                            </li>
+                            <li class="{% if request.path == '/account/help/' %} active {% endif %}">
+                                <a href="#">
+                                    <i class="fa fa-question"></i>
+                                    Help </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END MENU -->
+                </div>
+            </div>
+
+            <!--ACCOUNT DETAILS TAB-->
+            <div class="col-md-9">
+                {% block user_dashboard %}
+
+
+
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

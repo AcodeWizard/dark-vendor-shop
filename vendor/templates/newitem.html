@@ -1,0 +1,33 @@
+{% extends 'base_vendor.html' %}
+{% block content %}
+  This is my newitem page
+  <div class="col-8 mt-4 mx-auto">
+    <form>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Product name</span>
+        </div>
+        <input type="text" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Product price</span>
+        </div>
+        <input type="text" class="form-control">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Product name</span>
+        </div>
+        <div class="col-sm-1"></div>
+        <button type="button" class="btn btn-primary">Select file</button>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Product price</span>
+        </div>
+        <input type="text" class="form-control">
+      </div>
+    </form>
+  </div>
+{% endblock %}

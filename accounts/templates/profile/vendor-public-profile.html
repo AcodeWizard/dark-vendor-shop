@@ -1,0 +1,178 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load ratings %}
+{% load widget_tweaks %}
+{% load auth_extras %}
+{% block title %}
+    {#    {% if category %}{{ category.name }} {% else %} Products {% endif %}#}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mt-5">
+    <div class="row pt-3">
+        <div class="col-md-3">
+            <img src="{% static 'main/img/avatar.png' %}" alt="" class="w-100">
+        </div>
+        <!-- Navigation -->
+        <div class="col-md-9">
+            <!-- Top Nav -->
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link text-primary" href="#">Shop <span class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-primary" href="#">Messages: 0</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-primary" href="#">alienessential</a>
+                                </li>
+                            </ul>
+                            <form class="form-inline">
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <!-- Logout -->
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="nav float-right">
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="#">
+                                Bitcoin (BTC)
+                                <p class="text-center">B0.00</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="#">
+                                <i class="fa fa-cart-arrow-down fa-2x"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-primary" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Contact Info -->
+            <hr>
+            <div class="bg-white">
+                <div class="row">
+                    <div class="col-md-6">
+                        <i class="lead text-muted">Contact Vendor</i>
+                        <div class="ml-4">
+                            <p><strong>Username   :</strong> {{vendorUser.username}} <span class="text-primary">(170) (4.68)</span> <span class="text-warning"><i class="fa fa-star"></i></span></p>
+                            <p><strong>FE Enable  :</strong> No</p>
+                            <p><strong>Join Date  :</strong> {{vendorUser.timestamp}}</p>
+                            <p><strong>Last active:</strong> {{vendorUser.last_login}}</p>
+                        </div>
+                    </div>
+                    <!-- Buttons -->
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="float-right">
+                                    <a href="#" class="btn btn-danger rounded-0 mb-2">Report Vendor</a><br>
+                                    <a href="#" class="btn btn-success rounded-0 mb-2">Add To Favourite</a><br>
+                                    <a href="#" class="btn btn-success rounded-0">Send Message</a><br>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="float-right">
+                                    <p class="mr-5">Trust?</p>
+                                    <a href="#" class="text-dark"><span class="btn btn-secondary"><i class="fa fa-thumbs-up"></i></span> 13</a>
+                                    <a href="#" class="text-dark"><span class="btn btn-secondary"><i class="fa fa-thumbs-down"></i></span> 13</a>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Profile info -->
+    <div class="row">
+        <!-- Exchange -->
+        <div class="col-md-3">
+            <p class="text-muted"><i class="fa fa-bitcoin"></i> <strong>Exchange</strong></p>
+            <hr>
+            <hr>
+            <ol class="list-unstyled">
+                  <li  class="active">
+                  <a href="#">BTC  1</a>
+                  </li>
+
+                  <li  class="active">
+                      <a href="#">USD  {{ cryptoData.btcusd }}</a>
+                  </li>
+                    <li  class="active">
+                      <a href="#">GBP  {{ cryptoData.btcgbp }}</a>
+                  </li>
+                    <li  class="active">
+                      <a href="#">EUR  {{ cryptoData.btceur }}</a>
+                  </li>
+
+            </ol>
+            <!-- Onion Mirror-->
+            <p class="text-muted mt-5"><strong>Onion Mirror</strong> <i class="fa fa-download"></i></p>
+            <hr>
+            <a href="#">https://thehiddenwiki.org/2017/05/08/recent-downtime-of-the-hidden-wiki-in-march-2017/</a>
+        </div>
+        <!-- Profile -->
+        <div class="col-md-9">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#rating" role="tab" data-toggle="tab">Rating</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- Profile -->
+                <div role="tabpanel" class="tab-pane active" id="profile">
+                    <!-- Term & Condition -->
+                    <h4 class="mt-2">Term & Condition</h4>
+                    <div class="bg-light">
+                        <p class="p-3">{{vendorTerm}}</p>
+                    </div>
+                    <!-- Public PGP Key -->
+                    <h4 class="mt-2">Public PGP Key</h4>
+                    <div class="bg-light">
+                        <p class="p-3">{{vendorUser.pgp_key}}</p>
+                    </div>
+                </div>
+                <!-- Rating -->
+                <div role="tabpanel" class="tab-pane" id="rating">
+                  <div role="tabpanel" class="tab-pane active" id="ratings">
+                    <ul>
+                     {% for mykey,myvalue in ratingsDict.items %}
+                      <li>{{myvalue}}  => {% ratings mykey %}</li>
+                    {% endfor %}
+                      </ul>
+
+                  </div>
+
+                </div>
+           </div>
+        </div>
+    </div>
+</div>
+ {% endblock %}
+ 

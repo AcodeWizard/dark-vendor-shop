@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load ratings %}
+{% block title %}
+    {% if category %}{{ category.name }} {% else %} Products {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+    <!-- Page Content -->
+    <div class="container" style="margin-top:100px">
+
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4 text-center" style="font-size:24px">
+        <a href="{% url 'product_list' %}">All</a>
+        <i class="fas fa-arrow-right" style="padding:10px;font-size:18px"></i>
+        <a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a>
+        <i class="fas fa-arrow-right" style="padding:10px;font-size:18px"></i>
+        <a href="{{ product.get_absolute_url }}">{{ product.name }}</a>
+      </h1>
+
+      <!-- Portfolio Item Row -->
+      <div class="row" style="margin-top:100px">
+
+        <div class="col-md-6">
+          <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %} {% endif %}" alt="" >
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3">{{ product.name }}</h3>
+          <p class="my-3">{{ product.description|safe|linebreaksbr }}</p>
+          <ul>
+            <p class="text-muted">$ {{ product.price }}</p>
+            <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                {% csrf_token %}
+                <div class="fieldWrapper">
+                    Quantity:&nbsp;{{ cart_product_form.quantity }}
+                </div>
+                </br>
+                <input type="submit" value="add to cart" class="btn btn-primary">
+            </form>
+          </ul>
+        </div>
+          <div class="col-md-2">
+              <h3 class="my-3">Vendor</h3>
+              <ul>
+                  <li><a href="{% url 'vendorProfile' id=vendor.id %}">{{vendor.username}}</a> </li>
+                  <li><a href="#">Shipped From : {{country}}</a> </li>
+
+              </ul>
+          </div>
+          <div class="col-md-6">
+              {% if ratingsObject %}
+              {% ratings ratingsObject %}
+              {% else %} Rating Inactive for this Product {% endif %}
+          </div>
+      </div>
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}On-line Shop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/vendor/font-awesome/css/all.css' %}">
+    <link href="{% static 'main/global/css/components.css' %}" id="style_components' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'main/global/css/plugins.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'main/admin/layout/css/custom.css' %}" rel="stylesheet" type="text/css"/>
+	<link href="{% static 'main/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}" >
+    <link rel="stylesheet" href="{% static 'main/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/shopping_cart.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/profile.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'main/global/plugins/select2/select2.css' %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static 'main/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css' %}"/>
+	<link href="{% static 'main/global/plugins/simple-line-icons/simple-line-icons.min.css' %}" rel="stylesheet" type="text/css"/>
+	<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+	<link rel="stylesheet" type="text/css" href="//code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+	<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    {% block extra_head %}
+
+    {% endblock %}
+
+</head>
+<body>
+
+{#Navbar#}
+{% include 'main/navbar.html' %}
+
+{#Django messages#}
+{% if messages %}
+	{% for message in messages %}
+		{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+			<div class="container alert alert-success messages mt-5">
+				<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{% if 'safe' in message.tags %}
+				{{ message|safe }}<br/>
+				{% else %}
+				{{ message }}<br/>
+				{% endif %}
+				</span>
+			</div>
+		{% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+			<div class="container alert alert-info messages mt-5">
+				<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{% if 'safe' in message.tags %}
+				{{ message|safe }}<br/>
+				{% else %}
+				{{ message }}<br/>
+				{% endif %}
+				</span>
+			</div>
+		{% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+			<div class="container alert alert-warning messages mt-5">
+				<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{% if 'safe' in message.tags %}
+				{{ message|safe }}<br/>
+				{% else %}
+				{{ message }}<br/>
+				{% endif %}
+				</span>
+			</div>
+		{% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+			<div class="container alert alert-danger messages mt-5">
+				<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{% if 'safe' in message.tags %}
+				{{ message|safe }}<br/>
+				{% else %}
+				{{ message }}<br/>
+				{% endif %}
+				</span>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{% block content %}
+
+{% endblock %}
+
+
+<!--Main.js-->
+<!--<script type="text/javascript" src="{% static 'main/js/main.js' %}" ></script>-->
+
+<!--TinyMCE.js-->
+<!--<script src="{% static 'main/js/tinymce.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'main/js/tinymce-custom.js' %}" ></script>-->
+<script src="{% static 'main/global/plugins/jquery.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'main/global/plugins/jquery-migrate.min.js' %}" type="text/javascript"></script>
+<!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+<script src="{% static 'main/global/plugins/jquery-ui/jquery-ui.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'main/global/plugins/bootstrap/js/bootstrap.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'main/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'main/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'main/global/plugins/bootstrap-switch/js/bootstrap-switch.js' %}" type="text/javascript"></script>
+<script type="text/javascript" src="{% static 'main/global/plugins/select2/select2.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/global/plugins/datatables/media/js/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js' %}"></script>
+<script src="{% static 'main/global/scripts/metronic.js' %}" type="text/javascript"></script>
+<script src="{% static 'main/admin/layout/scripts/layout.js' %}" type="text/javascript"></script>
+<script src="{% static 'main/admin/pages/scripts/table-managed.js' %}"></script>
+<script src="{% static 'main/admin/pages/scripts/index.js' %}" type="text/javascript"></script>
+
+<script>
+jQuery(document).ready(function() {    
+   Metronic.init(); // init metronic core componets
+   Layout.init(); // init layout
+   TableManaged.init();
+   Index.initChat();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+.burger {
+  display: inline-block;
+  border: 0;
+  background: none;
+  outline: 0;
+  padding: 0;
+  cursor: pointer;
+  border-bottom: 4px solid;
+  width: 28px;
+}
+.burger::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.burger:before {
+  content: "";
+  display: block;
+  border-bottom: 4px solid;
+  width: 100%;
+  margin-bottom: 5px;
+}
+.burger:after {
+  content: "";
+  display: block;
+  border-bottom: 4px solid;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.burger-check {
+  display: none;
+}
+
+.navigation {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.burger-check:checked ~ .navigation {
+  max-height: 500px;
+}
+
+.navigation {
+  overflow: hidden;
+  max-height: 0;
+
+}
+
+.burger-check:checked ~ .navigation {
+  max-height: 500px;
+}
+
+.main-nav{
+    color:black;
+}
+
+
+
+
+

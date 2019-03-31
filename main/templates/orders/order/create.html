@@ -1,0 +1,73 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Your Shopping Cart| Checkout
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style="margin-top: 12%">
+            <div class="col-md-8">
+                <h4 class="page-header">Checkout</h4>
+
+                    {% if request.user.is_authenticated %}
+                    {% else %}
+                    <div style="margin-top:20px;margin-bottom:20px">
+                        <h6>You do not have an account, you must create an account,or <a style="text-decoration:underline" href="{% url 'login' %}">Sign-in</a> to order</h6>
+                    </div>
+                    {% endif %}
+
+                    <form action="." method="post">
+                        {% csrf_token %}
+
+                            {% for field in form.visible_fields %}
+                                <div class="form-group">
+                                 {{ field.label_tag }}
+
+                                  {% if form.is_bound %}
+                                    {% if field.errors %}
+                                      {% render_field field class="form-control is-invalid" %}
+                                      {% for error in field.errors %}
+                                        <div class="invalid-feedback">
+                                          {{ error }}
+                                        </div>
+                                      {% endfor %}
+                                    {% else %}
+                                      {% render_field field class="form-control is-valid" %}
+                                    {% endif %}
+                                  {% else %}
+                                    {% render_field field class="form-control"%}
+                                  {% endif %}
+                                </div>
+                              {% endfor %}
+
+                        <br>
+                        {% if request.user.is_authenticated %}
+                            <input type="submit" class="btn btn-primary" value="Submit order">
+                        {% else %}
+                            <input type="submit" class="btn btn-primary" value="Signup">
+                        {% endif %}
+
+                    </form>
+            </div>
+            <div class="col-md-4">
+                <div class="page-header">
+                    Your Order
+                </div>
+                <ul class="list-group">
+                    {% for item in cart %}
+                        <li class="list-group-item">
+                        {{ item.quantity }}x {{ item.product.name }}
+                        <span>$ {{ item.total_price }}</span>
+                        </li>
+                    {% endfor %}
+
+                <li class="list-group-item active">Total Cost: $ {{ cart.get_total_price }}</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

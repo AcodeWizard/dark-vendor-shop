@@ -1,0 +1,135 @@
+body {
+  font-family: "Libre Baskerville", serif;
+  font-style: italic;
+}
+
+
+a {
+  color: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+/*li {*/
+  /*list-style: none;*/
+  /*font-size: 25px;*/
+  /*padding: 5px 0;*/
+
+  /*a {*/
+    /*text-decoration: none;*/
+
+    /*&:hover {*/
+      /*text-decoration: underline;*/
+    /*}*/
+  /*}*/
+/*}*/
+
+
+@media only screen and (max-width: 992px) {
+    .main-page{
+        display:none;}
+    .blog-main{
+        width:100%;
+        padding:40px;}
+}
+
+@media only screen and (min-width: 992px) {
+.blog-main{
+    width:70%;}
+}
+
+
+.s-txt1 {
+  font-family: Montserrat-Regular;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #999999;
+}
+
+.s-txt2 {
+  font-family: Montserrat-Regular;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #00ad5f;
+}
+
+.s-txt3 {
+  font-family: Montserrat-Regular;
+  font-size: 13px;
+  line-height: 1.4;
+  color: red;
+}
+
+.s-txt4 {
+  font-family: Montserrat-Regular;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #999999;
+  text-transform: uppercase;
+}
+
+.s-txt5 {
+  font-family: Montserrat-Regular;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #00ad5f;
+  text-transform: uppercase;
+}
+
+.s-txt6 {
+  font-family: Montserrat-Regular;
+  font-size: 13px;
+  line-height: 1.4;
+  color: red;
+  text-transform: uppercase;
+}
+
+
+/*Medium text*/
+.m-txt1 {
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #999999;
+}
+
+.m-txt2 {
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #00ad5f;
+}
+
+.m-txt3 {
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: red;
+}
+
+.m-txt4 {
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #999999;
+  text-transform: uppercase;
+}
+
+.m-txt5 {
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #00ad5f;
+  text-transform: uppercase;
+}
+
+.m-txt6 {
+  font-family: Montserrat-Regular;
+  font-size: 15px;
+  line-height: 1.4;
+  color: red;
+  text-transform: uppercase;
+}

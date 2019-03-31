@@ -1,0 +1,45 @@
+{% extends 'profile/base-profile.html' %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }} {% else %} My Orders {% endif %}
+{% endblock %}
+
+{% block user_dashboard %}
+    <div class="container">
+        <div class="row">
+            <h6 > All Orders:</h6>
+            <table class="table table-striped table-hover">
+                <thead style="">
+                <tr>
+                    <th>Order id</th>
+                    <th>Payment</th>
+                    <th>Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order in orders %}
+                    <a href="{% url 'profile-order' order_id=order.id %}">
+                        <tr>
+                            <td>
+                                {{ order.id }}
+                            </td>
+                            <td>
+                                {% if order.paid %}
+                                    Confirmed Payment
+                                {% else %}
+                                    Unconfirmed Payment
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'user_order_detail' order_id=order.id %}" style="text-decoration:underline">more info</a>
+                            </td>
+                        </tr>
+                    </a>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+{% endblock %}

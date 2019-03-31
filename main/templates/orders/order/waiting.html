@@ -1,0 +1,21 @@
+
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+    Your Shopping Cart| Thank you
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row" style="margin-top: 12%">
+            <ul>
+              <li>Thank-you for shopping, we will now confirm your payment, check your orders in your <a href='{% url 'profile-orders' %}' style='text-decoration:underline'>profile</a> for the status of your payment</li>
+             </ul>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+

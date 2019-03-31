@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}On-line Shop{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main/vendor/font-awesome/css/all.css' %}">
+    {% block extra_head %}
+
+    {% endblock %}
+
+</head>
+<body>
+{#Django messages#}
+{% if messages %}
+	{% for message in messages %}
+		{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+			<div class="container alert alert-success messages mt-5">
+				<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{% if 'safe' in message.tags %}
+				{{ message|safe }}<br/>
+				{% else %}
+				{{ message }}<br/>
+				{% endif %}
+				</span>
+			</div>
+		{% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+			<div class="container alert alert-info messages mt-5">
+				<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{% if 'safe' in message.tags %}
+				{{ message|safe }}<br/>
+				{% else %}
+				{{ message }}<br/>
+				{% endif %}
+				</span>
+			</div>
+		{% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+			<div class="container alert alert-warning messages mt-5">
+				<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{% if 'safe' in message.tags %}
+				{{ message|safe }}<br/>
+				{% else %}
+				{{ message }}<br/>
+				{% endif %}
+				</span>
+			</div>
+		{% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+			<div class="container alert alert-danger messages mt-5">
+				<span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+				{% if 'safe' in message.tags %}
+				{{ message|safe }}<br/>
+				{% else %}
+				{{ message }}<br/>
+				{% endif %}
+				</span>
+			</div>
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+<div class="row">
+  <div class="col-md-2">
+    <nav class="navbar bg-dark justify-content-center">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#">My Sales</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">My Products</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'user_vendor_addproduct' %}">Add new item</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="col-md-10">
+    {% block content %}
+
+    {% endblock %}
+</div>
+</div>
+
+
+<!--&lt;!&ndash;Main.js&ndash;&gt;-->
+<!--<script type="text/javascript" src="{% static 'main/js/main.js' %}" ></script>-->
+
+<!--&lt;!&ndash;TinyMCE.js&ndash;&gt;-->
+<!--<script src="{% static 'main/js/tinymce.min.js' %}"></script>-->
+<!--<script type="text/javascript" src="{% static 'main/js/tinymce-custom.js' %}" ></script>-->
+
+</body>
+</html>

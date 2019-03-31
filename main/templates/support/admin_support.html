@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container" style="margin:auto;margin-top:6%">
+
+        {% for c in chats %}
+            <li>
+                <a href="{% url "support:admin_post_message" user=c.name %}" style="text-decoration:underline;color:blue">{{c.name}}:</a>
+                {% if c.read == False %}
+                    there are new messages
+                {% else %}
+                    no new messages
+                {% endif %}
+            </li>
+        {% endfor %}
+
+    </div
+
+{% endblock %}

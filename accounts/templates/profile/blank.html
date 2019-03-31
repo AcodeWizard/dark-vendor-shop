@@ -1,0 +1,156 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block title %}
+    {#    {% if category %}{{ category.name }} {% else %} Products {% endif %}#}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container ">
+        <div class="row profile" style="margin-top:12%">
+
+            <!-- SIDEBAR  -->
+            <div class="card col-md-3 bg-light" style="max-height: 420px;">
+                <div class="profile-sidebar">
+                    <!-- SIDEBAR USERPIC -->
+                    <div class="profile-userpic">
+                        <img src="{% static 'main/img/icons/profile_user.png' %}" class="img-responsive" alt="">
+                    </div>
+
+                    <!-- SIDEBAR USER TITLE -->
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name">
+                            {{ user.username }}
+                        </div>
+                        <div class="profile-usertitle-job">
+                            {{ user.level }}
+                        </div>
+                    </div>
+
+                    <!-- SIDEBAR BUTTONS -->
+                    <div class="profile-userbuttons">
+                        <button type="button" class="btn btn-success btn-sm">Follow</button>
+                        <button type="button" class="btn btn-danger btn-sm">Message</button>
+                    </div>
+
+                    <!-- SIDEBAR MENU -->
+                    <div class="profile-usermenu">
+                        <ul class="nav flex-column">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-home"></i>
+                                    <i class=""></i>
+                                    Overview </a>
+                            </li>
+                            <li class="active">
+                                <a href="#">
+                                    <i class="fa fa-user"></i>
+                                    Account Settings </a>
+                            </li>
+                            <li>
+                                <a href="#" target="_blank">
+                                    <i class="fa fa-clipboard-check"></i>
+                                    Tasks </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-question"></i>
+                                    Help </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- END MENU -->
+                </div>
+            </div>
+
+            <!--ACCOUNT DETAILS TAB-->
+            <div class="col-md-9">
+                <div class="row">
+
+                    <!--USER INFO && PASSWORD CHANGE-->
+                    <div class="col-12 col-md-12 mb-3">
+                        <div class="card bg-light" >
+                            <div class="card-body">
+                                <table class="table table-user-information">
+                                    <tbody>
+                                    <tr>
+                                        <td>User level:</td>
+                                        <td>{{ user.level }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Registered since:</td>
+                                        <td>11/12/2013</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--Change User password-->
+                            <div class="col-10 m-t-50 m-b-12 mx-auto">
+                                <a class="text-center" href="{% url 'password_change' %}"><P>Password Reset?</P></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--USER PGP KEY-->
+                    <div class="col-12 col-md-12 mb-3">
+                        <div class="card" >
+                            <div class="card-header text-white bg-dark">PGP Key</div>
+                            <div class="card-body bg-light">
+                                <div class="row">
+                                    <!--PGP KEY-->
+                                    <div class="col-10 bg-white py-4 mx-auto">
+                                            {{ user.pgp_key | safe }}
+
+                                    </div>
+
+                                    <div class="col-10 mt-4 mb-2 mx-auto">
+                                        {% if user.pgp_key %}
+                                            <button class="btn-block button" onclick="myFunction()">Edit PGP key</button>
+                                        {% else %}
+                                            <button class="btn-block button" onclick="myFunction()">Add PGP key</button>
+                                        {% endif %}
+                                    </div>
+
+                                    <!--PGP UPDATE FORM-->
+                                    <div class="col-12 mt-2" id="update_pgp" style="display: none;">
+                                        <form method="POST" action="{% url 'user_pgp_update' %}">
+                                            {% csrf_token %}
+
+                                            {% for field in pgp_form.visible_fields %}
+                                                <div class="form-group">
+
+                                                    {% if pgp_form.is_bound %}
+                                                        {% if field.errors %}
+                                                            {% render_field field class="form-control is-invalid" %}
+                                                            {% for error in field.errors %}
+                                                                <div class="invalid-feedback">
+                                                                    {{ error }}
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            {% render_field field class="form-control is-valid" %}
+                                                        {% endif %}
+                                                    {% else %}
+                                                        {% render_field field class="form-control" %}
+                                                    {% endif %}
+                                                </div>
+                                            {% endfor %}
+
+                                            <br>
+                                            <button type="submit" class="btn btn-primary">Update</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    </div>#}
+
+{% endblock %}

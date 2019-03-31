@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <h2>2Fa Authentication</h2>
+  <form action="{% url 'gpgverify' %}" method="post" style="margin:auto;margin-top:6%;width:40%;">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-12 col-md-12 mb-3">
+                <div class="card" >
+                    <div class="card-header text-white bg-dark">PGP Key</div>
+                    <div class="card-body bg-light">
+                        <div class="row">
+                            <textarea name="encrypted_message" rows="30" cols="80">{{ encmessage }}</textarea>
+                            <div class="col-10 mt-4 mb-2 mx-auto">
+                                <input type="text" id="message" name="message">
+                                <input type="submit" class="btn btn-primary" value="Verify" style="margin:auto">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer"></div>
+                </div>
+            </div>
+        </div>
+        <br>
+  </form>
+
+{% endblock %}

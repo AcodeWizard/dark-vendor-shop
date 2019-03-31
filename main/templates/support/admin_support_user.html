@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% load i18n %}
+
+{% block content %}
+
+    {{author}}
+    <div class="container" style="margin:auto;margin-top:6%">
+
+        <ul>
+            {% for c in messages %}
+                <li>
+                    {% if c.admin is True %}
+                        admin:
+                    {% else %}
+                        {{c.name}}:
+                    {% endif %}
+
+                    {{ c.message }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <form method="post" action='{% url "support:admin_post_message" user=author %}'>
+            {% csrf_token %}
+            <input type="text" class="message_box" name="message" />
+            <input type="submit" class="send_message_button" value="{% trans 'Send' %}" />
+        </form>
+
+    </div>
+
+{% endblock %}

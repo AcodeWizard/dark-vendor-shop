@@ -1,0 +1,81 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+    <div class="container" style="margin:auto;margin-top:6%">
+            <div class="col-md-12 col-sm-12">
+                <!-- BEGIN PORTLET-->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bubble font-red-sunglo"></i>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Chat</span>
+                        </div>
+                    </div>
+                    <div class="portlet-body" id="chats">
+                        <div class="scroller" style="height: 480px;" data-always-visible="1" data-rail-visible1="1">
+                            <ul class="chats">
+                                {% for c in messages %}
+                                    {% if c.admin is True %}
+                                        <li class="in">
+                                            <img class="avatar" alt="" src="{% static 'main/img/icons/admin_avatar.png' %}"/>
+                                            <div class="message">
+                                                <span class="arrow">
+                                                </span>
+                                                <a href="javascript:;" class="name">
+                                                admin </a>
+                                                {% if chat.read %}
+                                                    <span class="badge badge-primary">state: read</span>
+                                                {% else %}
+                                                    <span class="badge badge-danger">state: colse</span>
+                                                {% endif %}
+                                                <span class="body">
+                                                {{ c.message }} </span>
+                                            </div>
+                                        </li>
+                                    {% else %}
+                                        <li class="out">
+                                            <img class="avatar" alt="" src="{% static 'main/img/icons/profile_user.png' %}"/>
+                                            <div class="message">
+                                                <span class="arrow">
+                                                </span>
+                                                <a href="javascript:;" class="name">
+                                                {{c.name}} </a>
+                                                {% if chat.read %}
+                                                    <span class="badge badge-primary">state: read</span>
+                                                {% else %}
+                                                    <span class="badge badge-danger">state: colse</span>
+                                                {% endif %}
+                                                <span class="body">
+                                                {{ c.message }} </span>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <form method="post" action='{% url "support:customer_post_message" %}'>
+                            {% csrf_token %}
+                            <div class="chat-form">
+                                <div class="input-cont">
+                                    <input class="form-control" type="text" placeholder="Type a message here..." name="message" />
+                                </div>
+                                <div class="btn-cont">
+                                    <span class="arrow">
+                                    </span>
+                                    <button type="submit" class="btn blue icn-only" >
+                                        <i class="fa fa-check icon-white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- END PORTLET-->
+            </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+
+    <div class="container" style="margin:auto;margin-top:6%">
+            <div class="col-md-12 col-sm-12">
+                <!-- BEGIN PORTLET-->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-bubble font-red-sunglo"></i>
+                            <span class="caption-subject font-red-sunglo bold uppercase">Ticket Conversations</span>
+                        </div>
+                        <div style="float: right;">
+                            <a href="{% url 'support:customer_ticket_list' %}" class="btn btn-link pull-right" style="font-size: 20px;"><i class="fa fa-reply"></i> back</a>
+                        </div>
+                    </div>
+                    <div class="portlet-body" id="chats">
+                        <div class="scroller" style="height: 480px; font-style: normal;" data-always-visible="1" data-rail-visible1="1">
+                            <ul class="chats">
+                                {% for c in ticket_conversation %}
+                                    {% if c.admin is True %}
+                                        <li class="out">
+                                            <img class="avatar" alt="" src="{% static 'main/img/icons/admin_avatar.png' %}"/>
+                                            <div class="message">
+                                                <span class="arrow">
+                                                </span>
+                                                <a href="javascript:;" class="name">
+                                                admin </a>
+                                                <span class="body">
+                                                Content: {{ c.sub_description }} </span>
+                                            </div>
+                                        </li>
+                                    {% else %}
+                                        <li class="in">
+                                            <img class="avatar" alt="" src="{% static 'main/img/icons/profile_user.png' %}"/>
+                                            <div class="message">
+                                                <span class="arrow">
+                                                </span>
+                                                <a href="javascript:;" class="name">
+                                                {{request.user}} </a>
+                                                <span class="body">
+                                                Content: {{ c.sub_description }} </span>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="text-right">
+                            {% if ticket_state %}
+                                <a href="{% url 'support:ticket_state_change' 0 ticket_id %}" class="btn btn-danger">OPEN</a>
+                            {% else %}
+                                <a href="{% url 'support:ticket_state_change' 1 ticket_id %}" class="btn btn-primary" >CLOSE</a>
+                            {% endif %}
+                        </div>
+                        <form method="post" action='{% url "support:customer_ticket_replay" %}'>
+                            {% csrf_token %}
+                            <div class="chat-form">
+                                <div class="input-cont">
+                                    <label>Ticket ID: {{ ticket_id }}</label><br>
+                                    <input class="form-control" type="hidden" placeholder="" name="ticket_id" value="{{ ticket_id }}" readonly />
+                                    <label>Send Message: </label>
+                                    <textarea class="form-control" placeholder="Type content here..." name="sub_description" /></textarea>
+                                </div>
+                                <div style="clear: both;"></div>
+                                <div class="text-right" style="padding-right: 40px; margin-top: 20px;">
+                                    <button type="submit" class="btn blue icn-only" style="padding-left: 40px; padding-right: 40px;" >
+                                        <i class="fa fa-check icon-white"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- END PORTLET-->
+            </div>
+    </div>
+
+{% endblock %}
+

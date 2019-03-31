@@ -1,0 +1,52 @@
+{% extends 'base_vendor.html' %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+        <form action="{% url 'user_vendor_saveProduct'%}" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label >Category:</label>
+            {{ form.category }}
+          </div>
+          <div class="form-group">
+            <label >Name:</label>
+            {{ form.name }}
+          </div>
+          <div class="form-group">
+            <label >Slug:</label>
+            {{ form.slug }}
+          </div>
+          <div class="form-group">
+            <label >Description:</label>
+            {{ form.description }}
+          </div>
+
+          <div class="form-group">
+            <label >Price:</label>
+            {{ form.price }}
+          </div>
+          <div class="form-group">
+            <label >Available:</label>
+            {{ form.available }}
+          </div>
+          <div class="form-group">
+            <label >Stock:</label>
+            {{ form.stock }}
+          </div>
+          <div class="form-group">
+            <label >Image:</label>
+            {{ form.image }}
+          </div>
+          <div class="form-group">
+            <label >Country:</label>
+            {{ form.country }}
+          </div>
+          <input type="hidden" value="{{ ownerID }}" name="productOwnerID">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

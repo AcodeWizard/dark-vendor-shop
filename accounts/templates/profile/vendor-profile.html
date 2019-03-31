@@ -1,0 +1,48 @@
+{% extends 'profile/base-profile.html' %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }} {% else %} Vendor Profile {% endif %}
+{% endblock %}
+{% load widget_tweaks %}
+
+{% block user_dashboard %}
+<div class="col-12 col-md-12 mb-3">
+
+</div>
+
+
+     <div class="col-12 col-md-12 mb-3">
+            <div class="card" >
+                <div class="card-header text-white bg-dark">PGP Key</div>
+                <div class="card-body bg-light">
+                    <div class="row">
+                        {% block profile %}
+
+
+                            <!--PGP KEY-->
+                            <div class="col-10 mt-4 mb-2 mx-auto">
+                              <textarea cols="80" disabled rows="10">
+                                  {{ user.pgp_key | safe }}
+                              </textarea>
+                            </div>
+
+                            <!--<div class="col-10 mt-4 mb-2 mx-auto">-->
+                                <!--<form method="get" action="{% url 'user_pgp_update' %}">-->
+                                    <!--{% if user.pgp_key %}-->
+                                        <!--<button class="btn-block button">Edit PGP key</button>-->
+                                    <!--{% else %}-->
+                                        <!--<button class="btn-block button">Add PGP key</button>-->
+                                    <!--{% endif %}-->
+                                <!--</form>-->
+                            <!--</div>-->
+
+
+                        {% endblock %}
+                    </div>
+                </div>
+                <div class="card-footer"></div>
+            </div>
+        </div>
+ </div>
+
+{% endblock %}

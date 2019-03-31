@@ -1,0 +1,27 @@
+{% extends 'base_vendor.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>price</th>
+                </thead>
+                <tbody>
+                {% for product in products%}
+                <tr>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

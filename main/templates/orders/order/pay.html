@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}
+    Your Shopping Cart| Thank you
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row" style="margin-top: 12%">
+            <ul> 
+                <li>bitcoin addres: {{addres}}</li>
+                <li>you are paying: $ {{total_price}}</li>
+                <li>in btc: {{btc_price}}</li>
+                <li>current bitcoin course: $ {{btc_course}}</li>
+                <li>Once you have paid click the link bellow and we will verify that you completed the transaction</li>
+                <li><a style = "text-decoration:underline" href = "{% url 'orders:waiting' order_id=order_id addres=addres cost=btc_price %}">I Paid</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+{% endblock %}

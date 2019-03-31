@@ -1,0 +1,12 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container" style="margin:auto;margin-top:6%">
+	<div class="list-group col-md-12 col-lg-6 col-sm-12">
+	  <a href="{% url 'support:customer_ticket_list' %}" class="list-group-item active" style="font-size: 20px; padding: 5px 10px;">Ticket</a>
+	  <a href="{% url 'support:customer_support' %}" class="list-group-item" style="font-size: 20px; padding: 5px 10px;">Chat</a>
+	</div>
+</div>
+{% endblock %}

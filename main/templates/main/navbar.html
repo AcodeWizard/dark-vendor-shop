@@ -1,0 +1,60 @@
+{% load static %}
+
+
+<nav class="d-lg-none" style="padding:50px">
+    <input class="burger-check" id="burger-check" type="checkbox"><label for="burger-check" class="burger"></label>
+    <div id="navigation1" class="navigation">
+      <ul>
+        <li {% if not category %} class="active"{% endif %}><a href="{% url 'product_list' %}">All</a></li>
+      </ul>
+      {% for c in categories %}
+          <li {% if category.slug == c.slug %} class="active"{% endif %}>
+              <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+          </li>
+      {% endfor %}
+    </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top main-page">
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'product_list' %}">Shop</a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto text-white" style="font-size:24px">
+        {% if request.user.is_authenticated %}
+            <a href="{% url 'user_profile' %}" style="margin-right:20px">Profile</a>
+            <a href="{% url 'logout' %}" style="margin-right:20px">logout</a>
+        {% else %}
+            <a href="{% url 'signin' %}" style="margin-right:20px">Sign-in</a>
+            <a href="{% url 'signup' %}" style="margin-right:20px">Sign-up</a>
+        {% endif %}
+        {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+                <a href="{% url 'support:admin_support' %}" style="margin-right:20px">Admin-Support</a>
+            {% else %}
+                <a href="{% url 'support:support_list' %}" style="margin-right:20px">Support</a>
+            {% endif %}
+        {% endif %}
+
+        <a href="{% url 'cart:cart_detail' %}" style="margin-right:20px">
+
+          <div class="icon-cart" style="float: left">
+            <div class="cart-line-1" style="background-color: #E5E9EA"></div>
+            <div class="cart-line-2" style="background-color: #E5E9EA"></div>
+            <div class="cart-count" style="color:white">
+                {% with totail_items=cart|length %}
+                    {% if cart|length > 0 %}
+                        {{ totail_items }}
+                    {% else %}
+                        0
+                    {% endif %}
+                {% endwith %}
+            </div>
+            <div class="cart-wheel" style="background-color: #E5E9EA"></div>
+          </div>
+
+        </a>
+      </ul>
+    </div>
+  </div>
+</nav>
+
