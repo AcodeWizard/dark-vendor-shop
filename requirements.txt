@@ -5,7 +5,7 @@ celery==4.2.1
 certifi==2018.11.29
 chardet==3.0.4
 cryptowatch-client==0.1.4
-Django==2.1.7
+Django==2.2.13
 django-braces==1.13.0
 django-celery-results==1.0.4
 django-countries==5.3.3
